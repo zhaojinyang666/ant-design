@@ -1,6 +1,6 @@
 ---
 order: 2
-title: 
+title:
   zh-CN: 自定义建议
   en-US: Customize Suggestion
 ---
@@ -27,37 +27,38 @@ const webFrameworks = [
   { name: 'Django', type: 'Python' },
 ];
 
-const CustomNavMention = React.createClass({
-  getInitialState() {
-    return {
-      suggestions: [],
-    };
-  },
-  onSearchChange(value) {
+function onSelect(suggestion, data) {
+  console.log('onSelect', suggestion, data);
+}
+
+class CustomNavMention extends React.Component {
+  state = {
+    suggestions: [],
+  }
+  onSearchChange = (value) => {
     const searchValue = value.toLowerCase();
     const filtered = webFrameworks.filter(item =>
       item.name.toLowerCase().indexOf(searchValue) !== -1
     );
     const suggestions = filtered.map(suggestion =>
-      <Nav value={suggestion.name} >
-        <span>{suggestion.name} - {suggestion.type} </span>
+      <Nav value={suggestion.name} data={suggestion}>
+        <span>{suggestion.name} - {suggestion.type}</span>
       </Nav>);
     this.setState({ suggestions });
-  },
+  }
   render() {
     const { suggestions } = this.state;
     return (
       <Mention
-        style={{ width: 500, height: 100 }}
+        placeholder="@someone"
+        style={{ width: '100%', height: 100 }}
         suggestions={suggestions}
         onSearchChange={this.onSearchChange}
+        onSelect={onSelect}
       />
     );
-  },
-});
+  }
+}
 
-ReactDOM.render(
-  <CustomNavMention />,
-  mountNode
-);
+ReactDOM.render(<CustomNavMention />, mountNode);
 ````

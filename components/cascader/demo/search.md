@@ -1,5 +1,5 @@
 ---
-order: 9
+order: 8
 title:
   zh-CN: 搜索
   en-US: Search
@@ -25,6 +25,10 @@ const options = [{
     children: [{
       value: 'xihu',
       label: 'West Lake',
+    }, {
+      value: 'xiasha',
+      label: 'Xia Sha',
+      disabled: true,
     }],
   }],
 }, {
@@ -40,8 +44,8 @@ const options = [{
   }],
 }];
 
-function onChange(value) {
-  console.log(value);
+function onChange(value, selectedOptions) {
+  console.log(value, selectedOptions);
 }
 
 ReactDOM.render(
@@ -49,7 +53,6 @@ ReactDOM.render(
     options={options}
     onChange={onChange}
     placeholder="Please select"
-    style={{ width: 230 }}
     showSearch
   />,
   mountNode
