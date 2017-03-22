@@ -59,12 +59,12 @@ You can use:
 
 ## Version
 
-- Stable: [![npm package](http://img.shields.io/npm/v/antd.svg?style=flat-square)](https://www.npmjs.org/package/antd)
+- Stable: [![npm package](https://img.shields.io/npm/v/antd.svg?style=flat-square)](https://www.npmjs.org/package/antd)
 - Beta: [![](https://cnpmjs.org/badge/v/antd.svg?&tag=beta&subject=npm)](https://www.npmjs.org/package/antd)
 
 ## Compatibility
 
-Modern browsers and IE8+.
+Modern browsers and IE9+.
 
 > [IE8 issues](https://github.com/xcatliu/react-ie8)
 

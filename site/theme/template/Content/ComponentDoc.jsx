@@ -31,8 +31,8 @@ export default class ComponentDoc extends React.Component {
     const { doc, location } = props;
     const { content, meta } = doc;
     const locale = this.context.intl.locale;
-    const demos = Object.keys(props.demos).map((key) => props.demos[key])
-      .filter((demoData) => !demoData.meta.hidden);
+    const demos = Object.keys(props.demos).map(key => props.demos[key])
+      .filter(demoData => !demoData.meta.hidden);
     const expand = this.state.expandAll;
 
     const isSingleCol = meta.cols === 1;
@@ -75,7 +75,7 @@ export default class ComponentDoc extends React.Component {
 
     const { title, subtitle, filename } = meta;
     return (
-      <DocumentTitle title={`${subtitle || ''} ${title} - Ant Design`}>
+      <DocumentTitle title={`${subtitle || ''} ${title[locale] || title} - Ant Design`}>
         <article>
           <Affix className="toc-affix" offsetTop={16}>
             <ul className="toc demos-anchor">

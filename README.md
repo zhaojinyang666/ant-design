@@ -8,15 +8,12 @@
 
 An enterprise-class UI design language and React-based implementation.
 
-## :loudspeaker: Document Translation Recruitment
-
-We are now working on translate components document to English, and we need some translator and reviewer. https://github.com/ant-design/ant-design/issues/1471
-
 ## Features
 
 - An enterprise-class design language and high quality UI.
 - Graceful UI components out of the box, base on [React Component](http://react-component.github.io/badgeboard/).
-- A npm + webpack + babel + dora [workflow](http://ant-tool.github.io/index.html).
+- Writen in TypeScript with complete define types.
+- A npm + webpack + babel + dora + [dva](https://github.com/dvajs/dva) development framework.
 
 ## Install
 
@@ -66,7 +63,7 @@ import 'antd/dist/antd.css';  // or 'antd/dist/antd.less'
 
 ## Browser Support
 
-Normal browsers and Internet Explorer 8+.
+Normal browsers and Internet Explorer 9+.
 
 > [IE8 issues](https://github.com/xcatliu/react-ie8)
 
@@ -78,7 +75,8 @@ tsconfig.json
 {
   "compilerOptions": {
     "moduleResolution": "node",
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "allowSyntheticDefaultImports": true
   }
 }
 ```
@@ -86,8 +84,8 @@ tsconfig.json
 ## Links
 
 - [Home page](http://ant.design/)
-- [React UI page](http://ant.design/#/docs/react/introduce)
-- [ChangeLog](CHANGELOG.md)
+- [UI library](http://ant.design/docs/react/introduce)
+- [ChangeLog](CHANGELOG.en-US.md)
 - [Scaffold tool](https://github.com/ant-design/antd-init/)
 - [Development tool](http://ant-tool.github.io/)
 - [React components](http://react-component.github.io/)

@@ -8,6 +8,19 @@ import config from '../../';
 
 const SubMenu = Menu.SubMenu;
 
+function getActiveMenuItem(props) {
+  return props.params.children || props.location.pathname;
+}
+
+function fileNameToPath(filename) {
+  const snippets = filename.replace(/(\/index)?((\.zh-CN)|(\.en-US))?\.md$/i, '').split('/');
+  return snippets[snippets.length - 1];
+}
+
+function isNotTopLevel(level) {
+  return level !== 'topLevel';
+}
+
 export default class MainContent extends React.Component {
   static contextTypes = {
     intl: PropTypes.object.isRequired,
@@ -31,7 +44,9 @@ export default class MainContent extends React.Component {
     }
     if (prevModule !== this.currentModule) {
       const moduleData = this.getModuleData(nextProps);
-      const shouldOpenKeys = Object.keys(utils.getMenuItems(moduleData));
+      const shouldOpenKeys = Object.keys(utils.getMenuItems(
+        moduleData, this.context.intl.locale
+      ));
       this.setState({ openKeys: shouldOpenKeys });
     }
   }
@@ -58,18 +73,9 @@ export default class MainContent extends React.Component {
     this.setState({ openKeys });
   }
 
-  getActiveMenuItem(props) {
-    return props.params.children || props.location.pathname;
-  }
-
-  fileNameToPath(filename) {
-    const snippets = filename.replace(/(\/index)?((\.zh-CN)|(\.en-US))?\.md$/i, '').split('/');
-    return snippets[snippets.length - 1];
-  }
-
   generateMenuItem(isTop, item) {
     const locale = this.context.intl.locale;
-    const key = this.fileNameToPath(item.filename);
+    const key = fileNameToPath(item.filename);
     const text = isTop ?
             item.title[locale] || item.title : [
               <span key="english">{item.title}</span>,
@@ -92,13 +98,9 @@ export default class MainContent extends React.Component {
     );
   }
 
-  isNotTopLevel(level) {
-    return level !== 'topLevel';
-  }
-
   generateSubMenuItems(obj) {
     const topLevel = (obj.topLevel || []).map(this.generateMenuItem.bind(this, true));
-    const itemGroups = Object.keys(obj).filter(this.isNotTopLevel)
+    const itemGroups = Object.keys(obj).filter(isNotTopLevel)
       .sort((a, b) => config.typeOrder[a] - config.typeOrder[b])
       .map((type, index) => {
         const groupItems = obj[type].sort((a, b) => {
@@ -128,9 +130,11 @@ export default class MainContent extends React.Component {
 
   getMenuItems() {
     const moduleData = this.getModuleData(this.props);
-    const menuItems = utils.getMenuItems(moduleData);
+    const menuItems = utils.getMenuItems(
+      moduleData, this.context.intl.locale
+    );
     const topLevel = this.generateSubMenuItems(menuItems.topLevel);
-    const subMenu = Object.keys(menuItems).filter(this.isNotTopLevel)
+    const subMenu = Object.keys(menuItems).filter(isNotTopLevel)
       .sort((a, b) => config.categoryOrder[a] - config.categoryOrder[b])
       .map((category) => {
         const subMenuItems = this.generateSubMenuItems(menuItems[category]);
@@ -170,7 +174,7 @@ export default class MainContent extends React.Component {
 
   render() {
     const props = this.props;
-    const activeMenuItem = this.getActiveMenuItem(props);
+    const activeMenuItem = getActiveMenuItem(props);
     const menuItems = this.getMenuItems();
     const { prev, next } = this.getFooterNav(menuItems, activeMenuItem);
     const localizedPageData = props.localizedPageData;
