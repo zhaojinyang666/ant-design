@@ -7,6 +7,7 @@ import TimePicker from '../time-picker/locale/en_US';
 import Calendar from '../calendar/locale/en_US';
 
 export default {
+  locale: 'en',
   Pagination,
   DatePicker,
   TimePicker,
@@ -16,6 +17,8 @@ export default {
     filterConfirm: 'OK',
     filterReset: 'Reset',
     emptyText: 'No Data',
+    selectAll: 'Select All',
+    selectInvert: 'Select Invert',
   },
   Modal: {
     okText: 'OK',
@@ -34,5 +37,11 @@ export default {
   },
   Select: {
     notFoundContent: 'Not Found',
+  },
+  Upload: {
+    uploading: 'Uploading...',
+    removeFile: 'Remove file',
+    uploadError: 'Upload error',
+    previewFile: 'Preview file',
   },
 };

@@ -1,4 +1,18 @@
+// this file is not used if use https://github.com/ant-design/babel-plugin-import
+import warning from './_util/warning';
+
+const ENV = process.env.NODE_ENV;
+if (ENV !== 'production' && ENV !== 'test') {
+  warning(
+    false,
+    'You are using a whole package of antd,' +
+    'please use https://www.npmjs.com/package/babel-plugin-import to reduce app bundle size.'
+  );
+}
+
 export { default as Affix } from './affix';
+
+export { default as Anchor } from './anchor';
 
 export { default as AutoComplete } from './auto-complete';
 
@@ -37,6 +51,8 @@ export { default as Icon } from './icon';
 export { default as Input } from './input';
 
 export { default as InputNumber } from './input-number';
+
+export { default as Layout } from './layout';
 
 export { default as LocaleProvider } from './locale-provider';
 
@@ -93,3 +109,5 @@ export { default as Tooltip } from './tooltip';
 export { default as Mention } from './mention';
 
 export { default as Upload } from './upload';
+
+export { default as version } from './version';

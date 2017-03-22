@@ -1,7 +1,7 @@
 import RcRadio from 'rc-radio';
 import React from 'react';
 import classNames from 'classnames';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import PureRenderMixin from 'rc-util/lib/PureRenderMixin';
 
 export interface RadioProps {
   /** 指定当前是否选中*/
@@ -9,15 +9,19 @@ export interface RadioProps {
   /** 初始是否选中*/
   defaultChecked?: boolean;
   /** 根据 value 进行比较，判断是否选中  */
-  value?: string | number;
+  value?: any;
   style?: React.CSSProperties;
   prefixCls?: string;
   disabled?: boolean;
   className?: string;
   onChange?: (e: any) => any;
+  onMouseEnter?: React.FormEventHandler<any>;
+  onMouseLeave?: React.FormEventHandler<any>;
 }
 
 export default class Radio extends React.Component<RadioProps, any> {
+  static __ANT_RADIO = true;
+
   static Group: any;
   static Button: any;
 
@@ -28,22 +32,22 @@ export default class Radio extends React.Component<RadioProps, any> {
     return PureRenderMixin.shouldComponentUpdate.apply(this, args);
   }
   render() {
-    const { prefixCls, children, checked, disabled, className, style } = this.props;
+    const { prefixCls, className, children, style, ...restProps } = this.props;
     const wrapperClassString = classNames({
       [`${prefixCls}-wrapper`]: true,
-      [`${prefixCls}-wrapper-checked`]: checked,
-      [`${prefixCls}-wrapper-disabled`]: disabled,
-      [className]: !!className,
-    });
-    const classString = classNames({
-      [`${prefixCls}`]: true,
-      [`${prefixCls}-checked`]: checked,
-      [`${prefixCls}-disabled`]: disabled,
-    });
+      [`${prefixCls}-wrapper-checked`]: restProps.checked,
+      [`${prefixCls}-wrapper-disabled`]: restProps.disabled,
+    }, className);
+
     return (
-      <label className={wrapperClassString} style={style}>
-        <RcRadio {...this.props} className={classString} style={null} children={null} />
-        {children ? <span>{children}</span> : null}
+      <label
+        className={wrapperClassString}
+        style={style}
+        onMouseEnter={this.props.onMouseEnter}
+        onMouseLeave={this.props.onMouseLeave}
+      >
+        <RcRadio {...restProps} prefixCls={prefixCls} />
+        {children !== undefined ? <span>{children}</span> : null}
       </label>
     );
   }

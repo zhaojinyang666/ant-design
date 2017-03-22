@@ -18,12 +18,12 @@
 #nprogress .peg {
   display: block;
   position: absolute;
-  right: 0px;
+  right: 0;
   width: 100px;
   height: 100%;
   box-shadow: 0 0 10px #2e82f7, 0 0 5px #2e82f7;
   opacity: 1;
-  transform: rotate(3deg) translate(0px, -4px);
+  transform: rotate(3deg) translate(0, -4px);
 }
 
 /* Remove these to get rid of the spinner */
@@ -40,8 +40,13 @@
   height: 18px;
   box-sizing: border-box;
   border: solid 2px transparent;
+<<<<<<< HEAD
   border-top-color: #2e82f7;
   border-left-color: #2e82f7;
+=======
+  border-top-color: @primary-color;
+  border-left-color: @primary-color;
+>>>>>>> 986015ebea0928de8302f845b28f1cc3a27aa116
   border-radius: 50%;
   animation: nprogress-spinner 400ms linear infinite;
 }
@@ -57,6 +62,6 @@
 }
 
 @keyframes nprogress-spinner {
-  0%   { transform: rotate(0deg); }
+  0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
